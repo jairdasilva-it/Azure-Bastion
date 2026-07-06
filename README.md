@@ -108,7 +108,7 @@ Support IT N1/N2 | Technicien Systèmes & Réseaux | Cloud Azure
 
 ## 3. Machine virtuelle
 
-![Machine virtuelle](03-vm-overview.png)
+![Machine virtuelle](03-vm-private.png)
 
 ---
 
