@@ -2,9 +2,9 @@
 
 ## 🎯 Objectif
 
-Déployer et configurer Azure Bastion afin d'administrer une machine virtuelle Windows Server sans exposer de port RDP ni d'adresse IP publique.
+Déployer et configurer **Azure Bastion** afin d'administrer une machine virtuelle **Windows Server 2025** sans exposer de port **RDP (3389)** ni d'adresse IP publique.
 
-Ce projet a été réalisé dans le cadre de ma préparation à la certification Microsoft Azure AZ-104 afin de renforcer mes compétences en administration réseau et en sécurisation des accès sur Azure.
+Ce projet a été réalisé dans le cadre de ma préparation à la certification **Microsoft Azure AZ-104** afin de développer mes compétences en administration Cloud, en sécurisation des accès et en gestion des infrastructures Azure.
 
 ---
 
@@ -13,7 +13,8 @@ Ce projet a été réalisé dans le cadre de ma préparation à la certification
 - Microsoft Azure
 - Azure Bastion
 - Windows Server 2025
-- Virtual Network (VNet)
+- Azure Virtual Network (VNet)
+- Azure Subnets
 - Network Security Groups (NSG)
 
 ---
@@ -27,19 +28,21 @@ Ce projet a été réalisé dans le cadre de ma préparation à la certification
              Azure Bastion
                     │
                     ▼
-           Windows Server VM
-          (Adresse IP privée)
+      Windows Server 2025 VM
+        (Adresse IP privée)
 ```
 
 ---
 
-## ✅ Résultat
+## 🎯 Résultat
 
-La machine virtuelle est administrée exclusivement via Azure Bastion.
+Grâce à Azure Bastion :
 
-L'adresse IP publique de la machine virtuelle a été supprimée afin d'empêcher toute connexion RDP directe depuis Internet.
+- aucune adresse IP publique n'est nécessaire sur la machine virtuelle ;
+- aucun port RDP n'est exposé sur Internet ;
+- l'administration s'effectue directement depuis le portail Azure via une connexion sécurisée.
 
-L'administration est réalisée de manière sécurisée directement depuis le portail Azure.
+Cette architecture respecte les bonnes pratiques de sécurisation des machines virtuelles Azure.
 
 ---
 
@@ -47,16 +50,19 @@ L'administration est réalisée de manière sécurisée directement depuis le po
 
 **Jair Da Silva**
 
-Support IT N1/N2 | Technicien Systèmes & Réseaux | Cloud Azure
+Technicien Systèmes & Réseaux | Support IT N1/N2 | Microsoft Azure
 
-- GitHub : https://github.com/jairdasilva-it
-- LinkedIn : https://www.linkedin.com/in/jair-da-silva-6b14aa278
+GitHub : https://github.com/jairdasilva-it
+
+LinkedIn : https://www.linkedin.com/in/jair-da-silva-6b14aa278
 
 ---
 
-## 1️⃣ Création du réseau
+# 🚀 Étapes du projet
 
-- Création d'un Virtual Network
+## 1️⃣ Création du réseau virtuel
+
+- Création du Virtual Network
 - Création du sous-réseau **vm-subnet**
 - Création du sous-réseau **AzureBastionSubnet**
 
@@ -65,15 +71,15 @@ Support IT N1/N2 | Technicien Systèmes & Réseaux | Cloud Azure
 ## 2️⃣ Déploiement de la machine virtuelle
 
 - Création d'une machine virtuelle Windows Server 2025
-- Configuration de la carte réseau
 - Déploiement dans le sous-réseau **vm-subnet**
+- Attribution temporaire d'une adresse IP publique afin d'effectuer les premiers tests
 
 ---
 
 ## 3️⃣ Déploiement d'Azure Bastion
 
 - Création du service Azure Bastion
-- Association au sous-réseau **AzureBastionSubnet**
+- Déploiement dans le sous-réseau **AzureBastionSubnet**
 - Attribution d'une adresse IP publique au Bastion
 
 ---
@@ -81,20 +87,23 @@ Support IT N1/N2 | Technicien Systèmes & Réseaux | Cloud Azure
 ## 4️⃣ Sécurisation de la machine virtuelle
 
 - Suppression de l'adresse IP publique de la VM
-- Vérification que la VM n'est plus accessible directement via Internet
+- Vérification que la machine virtuelle n'est plus accessible directement depuis Internet
 
 ---
 
 ## 5️⃣ Validation
 
-- Connexion réussie via Azure Bastion
-- Ouverture de la session Windows Server directement depuis le portail Azure
+- Connexion réussie à la machine virtuelle via Azure Bastion
+- Ouverture d'une session Windows Server directement depuis le portail Azure
+- Validation du fonctionnement sans adresse IP publique sur la machine virtuelle
 
 ---
 
 # 📸 Captures d'écran
 
-## 1. Virtual Network et sous-réseaux
+## 1. Réseau virtuel et sous-réseaux
+
+Création du Virtual Network avec les sous-réseaux **vm-subnet** et **AzureBastionSubnet**.
 
 ![Virtual Network](01-vnet-subnets.png)
 
@@ -102,11 +111,15 @@ Support IT N1/N2 | Technicien Systèmes & Réseaux | Cloud Azure
 
 ## 2. Azure Bastion
 
+Déploiement du service Azure Bastion dans le sous-réseau dédié.
+
 ![Azure Bastion](02-bastion-host.png)
 
 ---
 
-## 3. Machine virtuelle
+## 3. Machine virtuelle (avant sécurisation)
+
+Machine virtuelle Windows Server déployée avant la suppression de son adresse IP publique.
 
 ![Machine virtuelle](03-vm-private.png)
 
@@ -114,11 +127,15 @@ Support IT N1/N2 | Technicien Systèmes & Réseaux | Cloud Azure
 
 ## 4. Machine virtuelle sans adresse IP publique
 
+Après suppression de l'adresse IP publique, la machine virtuelle n'est plus accessible directement depuis Internet.
+
 ![VM sans IP publique](04-vm-no-public-ip.png)
 
 ---
 
 ## 5. Connexion via Azure Bastion
+
+Connexion sécurisée à la machine virtuelle directement depuis le portail Azure.
 
 ![Connexion Bastion](05-connect-via-bastion.png)
 
@@ -126,17 +143,21 @@ Support IT N1/N2 | Technicien Systèmes & Réseaux | Cloud Azure
 
 ## 6. Session Windows Server
 
+Ouverture de la session Windows Server via Azure Bastion sans utilisation du protocole RDP sur Internet.
+
 ![Windows Server](06-windows-server-session.png)
 
 ---
 
-## 💼 Compétences démontrées
+# 💼 Compétences démontrées
 
-- Administration Microsoft Azure
-- Azure Bastion
-- Sécurisation des accès
-- Administration Windows Server
-- Réseaux virtuels (VNet)
-- Sous-réseaux Azure
+- Déploiement d'une infrastructure Microsoft Azure
+- Administration de machines virtuelles Azure
+- Configuration d'Azure Bastion
+- Gestion des Virtual Networks (VNet)
+- Gestion des sous-réseaux Azure
 - Gestion des adresses IP publiques
+- Sécurisation des accès aux machines virtuelles
+- Administration Windows Server
 - Bonnes pratiques de sécurité Cloud
+- Préparation à la certification Microsoft AZ-104
